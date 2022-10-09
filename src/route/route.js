@@ -10,8 +10,8 @@ const aws=require('aws-sdk')
 
 router.post('/register',userController.createUser)//create user
 
-
 router.post('/login',userController.login)//login user
+
 
 router.post('/books',mid.authentication,mid.authorisation,bookController.createBook)//create book
 
@@ -31,27 +31,25 @@ router.put('/books/:bookId/review/:reviewId',reviewController.updatereview)//upd
 router.delete('/books/:bookId/review/:reviewId',reviewController.deleteReview )//delete review
 
 
-
+//__________________________________AWS S3 Configration & Connection____________________________________________________________________________
 
 aws.config.update({
-    accessKeyId: "AKIAY3L35MCRZNIRGT6N",//AKIAY3L35MCRVFM24Q7U
-    secretAccessKey: "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",//9f+08tQrIkFVyDFqSft4J+lXmO4jPiU
+    accessKeyId: "AKIATICKC6Y7DKUMEZ53",//AKIAY3L35MCRZNIRGT6N
+    secretAccessKey: "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",// 9f+YFBVcSjZWM6DG9R4TUN8k8TGe4X+lXmO4jPiU
     region: "ap-south-1"
-})
 
+})
 let uploadFile= async ( file) =>{
    return new Promise( function(resolve, reject) {
     // this function will upload file to aws and return the link
     let s3= new aws.S3({apiVersion: '2006-03-01'}); // we will be using the s3 service of aws
 
     var uploadParams= {
-        ACL: "public-read",
-        Bucket: "classroom-training-bucket",  //HERE
-        Key: "msbte/" + file.originalname, //HERE 
+        // ACL: "public-read",
+        Bucket: "ask-akshay",  //HERE   classroom-training-bucket
+        Key: "akshay/" + file.originalname, //HERE 
         Body: file.buffer
     }
-
-
     s3.upload( uploadParams, function (err, data ){
         if(err) {
             return reject({"error": err})
@@ -60,16 +58,14 @@ let uploadFile= async ( file) =>{
         console.log("file uploaded succesfully")
         return resolve(data.Location)
     })
-
     // let data= await s3.upload( uploadParams)
     // if( data) return data.Location
     // else return "there is an error"
 
    })
 }
-
+    
 router.post("/write-file-aws", async function(req, res){
-
     try{
         let files= req.files
         if(files && files.length>0){
@@ -80,15 +76,14 @@ router.post("/write-file-aws", async function(req, res){
         }
         else{
             res.status(400).send({ msg: "No file found" })
-        }
-        
+        } 
     }
     catch(err){
         res.status(500).send({msg: err})
     }
-    
+      
 })
-
-
-module.exports=router
+               
+module.exports=router  
+ 
 

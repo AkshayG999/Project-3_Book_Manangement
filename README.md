@@ -1,4 +1,3 @@
- 
 Project - Books Management
 Key points
 Create a group database groupXDatabase. You can clean the db you previously used and resue that.
@@ -27,7 +26,7 @@ Books Model
   userId: {ObjectId, mandatory, refs to user model},
   ISBN: {string, mandatory, unique},
   category: {string, mandatory},
-  subcategory: {string, mandatory},
+  subcategory: [string, mandatory],
   reviews: {number, default: 0, comment: Holds number of reviews of this book},
   deletedAt: {Date, when the document is deleted}, 
   isDeleted: {boolean, default: false},
@@ -73,7 +72,7 @@ Return all books sorted by book name in Alphabatical order
 GET /books/:bookId
 Returns a book with complete details including reviews. Reviews array would be in the form of Array. Response example here
 Return the HTTP status 200 if any documents are found. The response structure should be like this
-If the book has no reviews then the response body should include book detail as shown here and an empty array for reviewsData.
+If the book has no reviews then the response body should include book detail as shown [here](#book-details-respo nse-no-reviews) and an empty array for reviewsData.
 If no documents are found then return an HTTP status 404 with a response like this
 PUT /books/:bookId
 Update a book by changing its
@@ -96,7 +95,7 @@ Get review details like review, rating, reviewer's name in request body.
 Update the related book document by increasing its review count
 Return the updated book document with reviews data on successful operation. The response body should be in the form of JSON object like this
 PUT /books/:bookId/review/:reviewId
-Update the review - review, rating, reviewer's name.
+Update the review - review, rating, reviewerBy'.
 Check if the bookId exists and is not deleted before updating the review. Check if the review exist before updating the review. Send an error response with appropirate status code like this if the book does not exist
 Get review details like review, rating, reviewer's name in request body.
 Return the updated book document with reviews data on successful operation. The response body should be in the form of JSON object like this
@@ -207,7 +206,7 @@ Book details response
     "excerpt": "book body",
     "userId": ObjectId("88abc190ef0288abc190ef02")
     "category": "Book",
-    "subcategory": "Non fiction",
+    "subcategory": ["Non fiction", "Self Help"],
     "isDeleted": false,
     "reviews": 4,
     "releasedAt": "2021-09-17T04:25:07.803Z"
@@ -259,7 +258,7 @@ Book details response no reviews
     "excerpt": "book body",
     "userId": ObjectId("88abc190ef0288abc190ef02")
     "category": "Book",
-    "subcategory": "Non fiction",
+    "subcategory": "Non fiction", "Self Help",
     "isDeleted": false,
     "reviews": 0,
     "releasedAt": "2021-09-17"

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const isvalidISBN = function (isbn) {
-    return /^(97[8|9]-)([0-9]{10,13}+)$/.test(isbn)
+    return /^(97[89]-\d{10,13})$/.test(isbn);
 }
 
 const isValidTitle = function (title) {
@@ -55,4 +55,5 @@ const isValidDate = function (Date) {
     return /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(Date)
 }
 
-module.exports = { isvalidISBN, isValidTitle, isValidPassword, isvalidPincode, isvalidRating, isValidMobileNumber, isValidString, isValidEmail, isLowerCase, isValidSpace, isValidObjectId, isvalidRequest,isValidDate }
+
+module.exports = { isvalidISBN, isValidTitle, isValidPassword, isvalidPincode, isvalidRating, isValidMobileNumber, isValidString, isValidEmail, isLowerCase, isValidSpace, isValidObjectId, isvalidRequest, isValidDate }

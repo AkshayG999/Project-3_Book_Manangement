@@ -8,7 +8,7 @@ app.use(express.json()) //bson
 app.use(multer().any())
 const port = 3000
 
-mongoose.connect('mongodb+srv://prince9871:BZjeaWxY1uTLCefz@cluster0.pelsn1m.mongodb.net/group66Database', {
+mongoose.connect('mongodb+srv://AkshayGaikwad:Akshay143@cluster0.ii90wme.mongodb.net/bookmanagement', {
     useNewUrlParser: true
 })
     .then(() => console.log("MongoDB Running"))

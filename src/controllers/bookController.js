@@ -72,7 +72,6 @@ const getBook = async function (req, res) {
         let queries = req.query
         let { authorId, category, subcategory, bookId } = queries
 
-
         let filter = { isDeleted: false }
 
         if (bookId) filter.bookId = bookId;
